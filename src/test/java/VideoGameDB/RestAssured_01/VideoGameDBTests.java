@@ -1,6 +1,5 @@
 package VideoGameDB.RestAssured_01;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import VideoGameDB.config.VideoGameConfig;
@@ -9,7 +8,6 @@ import static io.restassured.RestAssured.*;
 
 public class VideoGameDBTests extends VideoGameConfig {
 
-	@Ignore
 	@Test
 	public void getAllGames()  {
 		given().
@@ -69,6 +67,11 @@ public class VideoGameDBTests extends VideoGameConfig {
 
 	@Test
 	public void deleteGame()  {
+		given().
+		when()
+			.delete("videogames/100").
+		then();
+		
 		given().
 		when()
 			.delete("videogames/101").
