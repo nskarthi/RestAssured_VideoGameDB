@@ -1,0 +1,106 @@
+------------------------------------------------------------------------------------
+API #1: PRE-REQUISITE SOFTWARES
+------------------------------------------------------------------------------------
+ - GIT
+ - Postman
+ - Dependent JARS (POM.xml):
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.rest-assured</groupId>
+			<artifactId>rest-assured</artifactId>
+			<version>4.1.2</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.8.8</version>
+		</dependency>
+		<dependency>
+			<groupId>io.rest-assured</groupId>
+			<artifactId>json-schema-validator</artifactId>
+			<version>4.1.2</version>
+		</dependency>
+		<dependency>
+			<groupId>com.github.scribejava</groupId>
+			<artifactId>scribejava-apis</artifactId>
+			<version>2.5.3</version>
+		</dependency>
+	</dependencies>
+
+------------------------------------------------------------------------------------
+SAMPLE API #1: VIDEO GAME
+------------------------------------------------------------------------------------
+GIT Repository: Course Code: https://github.com/james-willett/RestAssuredFundamentals
+API:
+       Video Game (for your own local swagger): https://github.com/james-willett/VideoGameDB
+		(or)
+       http://video-game-db.eu-west-2.elasticbeanstalk.com/swagger-ui/index.html#/Video_Games
+
+------------------------------------------------------------------------------------
+SAMPLE API #2: FOOTBALL DATA
+------------------------------------------------------------------------------------
+Website: https://Football-data.org. Register here to get the free API Token
+API email: nskarthi@gmail.com
+API Token: 63de3e1a914141ccb4f6b8a6b5c3bdd6
+API: http://api.football-data.org/v2/teams/57
+	Headers:
+		x-Response-Control: minified
+		x-Auth-Token: 63de3e1a914141ccb4f6b8a6b5c3dbd6
+
+------------------------------------------------------------------------------------------
+--Code--
+------------------------------------------------------------------------------------------
+BasicTests.java
+-------------------
+import org.junit.Test;
+import static io.restassured.RestAssured.*;
+public class BasicTests extends TestConfig {
+	@Test
+	public void sample() {
+		given()
+			.log().all().
+		when().get("videogames").
+		then()
+			.log().all();
+	}
+}
+
+TestConfig.java
+-------------------
+
+import org.junit.BeforeClass;
+
+import io.restassured.RestAssured;
+import io.restassured.builder.RequestSpecBuilder;
+import io.restassured.builder.ResponseSpecBuilder;
+import io.restassured.specification.RequestSpecification;
+import io.restassured.specification.ResponseSpecification;
+
+public class TestConfig {
+	
+	@BeforeClass
+	public static void setup() {
+		// example: http://video-game-db.eu-west-2.elasticbeanstalk.com/app/videogames
+		RestAssured.baseURI = "http://video-game-db.eu-west-2.elasticbeanstalk.com";
+		RestAssured.basePath = "/app/";
+
+		RequestSpecification requestSpecification = new RequestSpecBuilder()
+				.addHeader("Content-Type", "application/json")
+				.addHeader("Accept", "application/json")
+				.build();
+
+		ResponseSpecification responseSpecification = new ResponseSpecBuilder()
+				.expectStatusCode(200)
+				.build();
+
+		RestAssured.requestSpecification = requestSpecification;
+		RestAssured.responseSpecification = responseSpecification;
+	}
+}
