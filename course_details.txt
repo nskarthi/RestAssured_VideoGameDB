@@ -19,7 +19,7 @@ GIT Hub: https://www.datacamp.com/community/tutorials/git-push-pull
 	git commit -m "your message"
 	git remote add origin "git_rep.git"
 	git push -u origin master
-		enter git id an git password
+		enter git id and git password in the dialog that opens up
 	
 	
 
