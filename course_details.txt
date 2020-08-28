@@ -1,4 +1,27 @@
 GIT Hub: https://www.datacamp.com/community/tutorials/git-push-pull
+	//To import from git
+	git clone --bare https://gitrepo.git
+	
+	//To push the local copy to GIT
+	cd repo.git
+	git push --mirror https://github.com/ghuser/repo.git
+	
+	//Remove the temporary local repository.
+	rm -rf repo.git
+
+	//Use this to push the 
+	Go to GIT Bash
+	pwd
+	cd "<workspace>"
+	git init
+	git add .
+	git status
+	git commit -m "your message"
+	git remote add origin "git_rep.git"
+	git push -u origin master
+		enter git id an git password
+	
+	
 
 ------------------------------------------------------------------------------------
 API #1: PRE-REQUISITE SOFTWARES
