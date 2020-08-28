@@ -7,6 +7,7 @@ import VideoGameDB.config.VideoGameConfig;
 import VideoGameDB.config.VideoGamesEndpoints;
 
 import static io.restassured.RestAssured.*;
+
 public class BasicTests extends VideoGameConfig {
 
 	@Ignore
