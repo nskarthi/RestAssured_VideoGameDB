@@ -1,3 +1,7 @@
+XML Object to XML Schema: https://www.freeformatter.com/xsd-generator.html
+JSON Object to JSON Schema: https://jsonschema.net/home
+Generate POJO from XML / JSON: http://pojo.sodhanalibrary.com/
+
 GIT Hub: https://www.datacamp.com/community/tutorials/git-push-pull
 	//To import from git
 	git clone --bare https://gitrepo.git
@@ -9,7 +13,7 @@ GIT Hub: https://www.datacamp.com/community/tutorials/git-push-pull
 	//Remove the temporary local repository.
 	rm -rf repo.git
 
-	//Use this to push the 
+	//Use this to push the code to GIT Hub
 	Go to GIT Bash
 	pwd
 	cd "<workspace>"

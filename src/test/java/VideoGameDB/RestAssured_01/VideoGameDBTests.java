@@ -1,10 +1,15 @@
 package VideoGameDB.RestAssured_01;
 
 import org.junit.Test;
+import static org.hamcrest.Matchers.lessThan;
 
 import VideoGameDB.config.VideoGameConfig;
 import VideoGameDB.config.VideoGamesEndpoints;
+import io.restassured.response.Response;
+
 import static io.restassured.RestAssured.*;
+import static io.restassured.matcher.RestAssuredMatchers.matchesXsdInClasspath;
+import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 
 public class VideoGameDBTests extends VideoGameConfig {
 
@@ -86,4 +91,64 @@ public class VideoGameDBTests extends VideoGameConfig {
 			.get(VideoGamesEndpoints.SINGLE_VIDEO_GAME).
 		then();
 		}
+	
+	@Test
+	public void testVideoGameSerializationByJSON() {
+		VideoGamePOJO videoGame = new VideoGamePOJO("81", "2005-11-01", "Macho Man", "CBE", "104", "Killer");
+		given()
+			.body(videoGame).
+		when()
+			.post(VideoGamesEndpoints.ALL_VIDEO_GAMES).
+		then();
+	}
+	
+	@Test
+	public void convertJSONtoPOJO() {
+		Response response = 
+				given()
+					.pathParam("videoGameId", 103).
+				when()
+					.get(VideoGamesEndpoints.SINGLE_VIDEO_GAME);
+		
+		VideoGamePOJO videoGamePojo = response.body().as(VideoGamePOJO.class);
+		System.out.println(videoGamePojo.toString());
+	}
+	
+	@Test
+	public void testVideoGameSchemaXML() {
+		given()
+			.pathParam("videoGameId", 102)
+			.header("Content-Type", "application/xml")
+			.header("Accept", "application/xml").
+		when()
+			.get(VideoGamesEndpoints.SINGLE_VIDEO_GAME).
+		then()
+			.body(matchesXsdInClasspath("VideoGameXSD.xsd"));
+	}
+
+	@Test
+	public void testVideoGameSchemaJSON() {
+		given()
+			.pathParam("videoGameId", 103).
+		when()
+			.get(VideoGamesEndpoints.SINGLE_VIDEO_GAME).
+		then()
+			.body(matchesJsonSchemaInClasspath("VideoGameJsonSchema.json"));
+	}
+	
+	@Test
+	public void captureResponseTime() {
+		long responseTime = get(VideoGamesEndpoints.ALL_VIDEO_GAMES).time();
+		System.out.println("Response Time in MS: " + responseTime);
+	}
+	
+	@Test
+	public void assertOnResponseTime() {
+		when().
+			get(VideoGamesEndpoints.ALL_VIDEO_GAMES).
+		then()
+			.time(lessThan(1600L));
+
+	}
+	
 }
