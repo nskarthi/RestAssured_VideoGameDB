@@ -21,7 +21,7 @@ public static ResponseSpecification football_responseSpec;
 				.setBaseUri("http://api.football-data.org")
 				.setBasePath("/v2/")
 				.addHeader("x-Response-Control", "minified")
-				.addHeader("x-Auth-Token", "63de3e1a914141ccb4f6b8a6b5c3dbd6")
+				.addHeader("x-Auth-Token", "63de3e1a914141ccb4f6b8a6b5c3bdd6")
 				.addFilter(new RequestLoggingFilter())
 				.addFilter(new ResponseLoggingFilter())
 				.build();

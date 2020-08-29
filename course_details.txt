@@ -77,7 +77,7 @@ API Token: 63de3e1a914141ccb4f6b8a6b5c3bdd6
 API: http://api.football-data.org/v2/teams/57
 	Headers:
 		x-Response-Control: minified
-		x-Auth-Token: 63de3e1a914141ccb4f6b8a6b5c3dbd6
+		x-Auth-Token: 63de3e1a914141ccb4f6b8a6b5c3bdd6
 
 ------------------------------------------------------------------------------------------
 --Code--

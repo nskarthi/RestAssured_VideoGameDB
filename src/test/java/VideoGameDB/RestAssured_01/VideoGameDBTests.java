@@ -79,12 +79,11 @@ public class VideoGameDBTests extends VideoGameConfig {
 	}
 	
 	@Test
-public void getSingleGame() {
-given()
-.pathParam("videoGameId", 1).
-when()
-.get(VideoGamesEndpoints.SINGLE_VIDEO_GAME).
-then();
-}
-	
+	public void getSingleGame() {
+		given()
+			.pathParam("videoGameId", 1).
+		when()
+			.get(VideoGamesEndpoints.SINGLE_VIDEO_GAME).
+		then();
+		}
 }
