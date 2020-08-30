@@ -1,9 +1,11 @@
+Nice Groovy GPath Tutorial: https://www.james-willett.com/groovy-gpath-in-rest-assured-part1-overview
+
 XML Object to XML Schema: https://www.freeformatter.com/xsd-generator.html
 JSON Object to JSON Schema: https://jsonschema.net/home
 Generate POJO from XML / JSON: http://pojo.sodhanalibrary.com/
 
 GIT Hub: https://www.datacamp.com/community/tutorials/git-push-pull
-	//To import from git
+	//To import from git repo
 	git clone --bare https://gitrepo.git
 	
 	//To push the local copy to GIT
