@@ -72,9 +72,22 @@ public class GPathJSONTests extends FootballApiConfig {
 		String nationality = "England";
 
 		Response response = get("teams/57");
+
 		ArrayList<Map<String, ?>> allPlayersCertainNation = response.path("squad.findAll { it.position == '%s' }."
 				+ "findAll { it.nationality == '%s' }", position, nationality);
 		System.out.println("All Players: " + allPlayersCertainNation);
+	}
+	
+	@Test
+	public void extractNamesOfPlayersFromCertianCountryAndInCertainPosition() {
+		String position = "Midfielder";
+		String nationality = "England";
+
+		Response response = get("teams/57");
+		List<String> playerNames = response.path("squad.findAll { it.position == '%s' }."
+				+ "findAll { it.nationality == '%s' }.name", position, nationality);
+		System.out.println("Player Names: " + playerNames);
+
 	}
 	
 }
