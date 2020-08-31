@@ -24,6 +24,7 @@ public class FootballAPITests extends FootballApiConfig {
 		when()
 			.get("areas").
 		then();
+		System.out.println("Over");
 	}
 
 	@Ignore
