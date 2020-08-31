@@ -8,13 +8,14 @@ import java.util.List;
 
 import static io.restassured.RestAssured.*;
 
-import VideoGameDB.config.FootballApiConfig;
+import VideoGameDB.config.Endpoints;
+import VideoGameDB.config.TestConfig;
 import io.restassured.http.ContentType;
 import io.restassured.http.Header;
 import io.restassured.http.Headers;
 import io.restassured.response.Response;
 
-public class FootballAPITests extends FootballApiConfig {
+public class FootballAPITests extends TestConfig {
 
 	@Ignore
 	@Test
@@ -32,7 +33,7 @@ public class FootballAPITests extends FootballApiConfig {
 	public void getDateFounded() {
 		given().
 		when()
-			.get("teams/57").
+			.get(Endpoints.TEAM_DETAILS).
 		then()
 			.body("founded", equalTo(1886));
 	}
@@ -41,14 +42,14 @@ public class FootballAPITests extends FootballApiConfig {
 	public void getFirstTeamName() {
 		given().
 		when()
-			.get("competitions/2021/teams").
+			.get(Endpoints.COMPETITION_DETAILS).
 		then()
 			.body("teams[2].name", equalTo("Chelsea FC"));
 	}
 
 	@Test
 	public void getAllTeamData() {
-		String responseBody = get("teams/57").asString();
+		String responseBody = get(Endpoints.TEAM_DETAILS).asString();
 		System.out.println(responseBody);
 	}
 	
@@ -57,7 +58,7 @@ public class FootballAPITests extends FootballApiConfig {
 		Response response = 
 				given().
 				when()
-					.get("teams/57").
+					.get(Endpoints.TEAM_DETAILS).
 				then()
 					.contentType(ContentType.JSON)
 					.extract().response();
@@ -71,7 +72,7 @@ public class FootballAPITests extends FootballApiConfig {
 		Response response = 
 				given().
 				when()
-					.get("teams/57").
+					.get(Endpoints.TEAM_DETAILS).
 				then()
 					.contentType(ContentType.JSON)
 					.extract().response();
@@ -88,7 +89,7 @@ public class FootballAPITests extends FootballApiConfig {
 
 	@Test
 	public void extractFirstTeamName() {
-		String firstTeamName = get("competitions/2021/teams").jsonPath().getString("teams[0].name");
+		String firstTeamName = get(Endpoints.COMPETITION_DETAILS).jsonPath().getString("teams[0].name");
 		System.out.println("Content Type: " + firstTeamName);
 	}
 	
@@ -97,7 +98,7 @@ public class FootballAPITests extends FootballApiConfig {
 		Response response = 
 				given().
 				when()
-					.get("competitions/2021/teams").
+					.get(Endpoints.COMPETITION_DETAILS).
 				then()
 					.contentType(ContentType.JSON)
 					.extract().response();
