@@ -57,12 +57,33 @@ public class GPathXMLTests extends TestConfig {
 	}
 	
 	@Test
-	public void getListOfXmlNodes1() {
+	public void getSingleElementDepthFirst() {
 		String responseAsString = get(Endpoints.ALL_VIDEO_GAMES).asString();
 		
-		List<String> allResults = XmlPath.from(responseAsString).get(
-				"videoGames.videoGame.findAll { element -> return element.name } ");
-		System.out.println(allResults.toString());
+		int reviewScore = XmlPath.from(responseAsString).getInt(
+				"**.find { it.name == 'Gran Turismo 3' }.reviewScore");
+		System.out.println(reviewScore);
+	}
+	
+	@Test
+	public void getAllNodesBasedOnACondition() {
+		String responseAsString = get(Endpoints.ALL_VIDEO_GAMES).asString();
+		int reviewScore = 90;
+		
+		List<Node> allVideoGamesOverCertainScore = XmlPath.from(responseAsString).get(
+				"videoGames.videoGame.findAll { it.reviewScore.toFloat() < " + reviewScore + "}");
+		System.out.println(allVideoGamesOverCertainScore);
+	}
+	
+	@Test
+	public void getAttributeValueOfAllNodesBasedOnACondition() {
+		String responseAsString = get(Endpoints.ALL_VIDEO_GAMES).asString();
+		int reviewScore = 90;
+
+		List<Object> namesOfAllVideoGamesOverCertainScore = XmlPath.from(responseAsString).getList(
+				"videoGames.videoGame.findAll { it.reviewScore.toFloat() < " + reviewScore + "}.name");
+		System.out.println("Names of Games With Review Score > 90 : " + namesOfAllVideoGamesOverCertainScore);
+
 	}
 	
 }
