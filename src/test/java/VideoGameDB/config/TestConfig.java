@@ -10,12 +10,13 @@ import io.restassured.filter.log.ResponseLoggingFilter;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 
-public class FootballApiConfig {
+public class TestConfig {
 
-public static RequestSpecification football_requestSpec;
-public static ResponseSpecification football_responseSpec;
+	public static RequestSpecification videoGame_requestSpec;
+	public static RequestSpecification football_requestSpec;
+	public static ResponseSpecification responseSpec;
 
-@BeforeClass
+	@BeforeClass
 	public static void setup() {
 		football_requestSpec = new RequestSpecBuilder()
 				.setBaseUri("http://api.football-data.org")
@@ -26,11 +27,21 @@ public static ResponseSpecification football_responseSpec;
 				.addFilter(new ResponseLoggingFilter())
 				.build();
 
-		football_responseSpec = new ResponseSpecBuilder()
-				.expectStatusCode(200)
+		videoGame_requestSpec = new RequestSpecBuilder()
+				.setBaseUri("http://video-game-db.eu-west-2.elasticbeanstalk.com")
+				.setBasePath("/app/")
+				.addHeader("Content-Type", "application/json")
+				.addHeader("Accept", "application/json")
+				.addFilter(new RequestLoggingFilter())
+				.addFilter(new ResponseLoggingFilter())
 				.build();
 
 		RestAssured.requestSpecification = football_requestSpec;
-		RestAssured.responseSpecification = football_responseSpec;
+
+		responseSpec = new ResponseSpecBuilder()
+				.expectStatusCode(200)
+				.build();
+
+		RestAssured.responseSpecification = responseSpec;
 	}
 }
