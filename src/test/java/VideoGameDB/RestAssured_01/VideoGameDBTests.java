@@ -3,21 +3,21 @@ package VideoGameDB.RestAssured_01;
 import org.junit.Test;
 import static org.hamcrest.Matchers.lessThan;
 
-import VideoGameDB.config.VideoGameConfig;
-import VideoGameDB.config.VideoGamesEndpoints;
+import VideoGameDB.config.TestConfig;
+import VideoGameDB.config.Endpoints;
 import io.restassured.response.Response;
 
 import static io.restassured.RestAssured.*;
 import static io.restassured.matcher.RestAssuredMatchers.matchesXsdInClasspath;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 
-public class VideoGameDBTests extends VideoGameConfig {
+public class VideoGameDBTests extends TestConfig {
 
 	@Test
 	public void getAllGames()  {
 		given().
 		when()
-			.get(VideoGamesEndpoints.ALL_VIDEO_GAMES).
+			.get(Endpoints.ALL_VIDEO_GAMES).
 		then();
 	}
 
@@ -34,7 +34,7 @@ public class VideoGameDBTests extends VideoGameConfig {
 		given()
 			.body(gameBodyJson).
 		when()
-			.post(VideoGamesEndpoints.ALL_VIDEO_GAMES).
+			.post(Endpoints.ALL_VIDEO_GAMES).
 		then();
 	}
 
@@ -49,7 +49,7 @@ public class VideoGameDBTests extends VideoGameConfig {
 		.header("Content-Type", "application/xml")
 		.header("Accept", "application/xml").
 	when()
-		.post(VideoGamesEndpoints.ALL_VIDEO_GAMES).
+		.post(Endpoints.ALL_VIDEO_GAMES).
 	then();
 	}
 
@@ -88,7 +88,7 @@ public class VideoGameDBTests extends VideoGameConfig {
 		given()
 			.pathParam("videoGameId", 1).
 		when()
-			.get(VideoGamesEndpoints.SINGLE_VIDEO_GAME).
+			.get(Endpoints.SINGLE_VIDEO_GAME).
 		then();
 		}
 	
@@ -98,7 +98,7 @@ public class VideoGameDBTests extends VideoGameConfig {
 		given()
 			.body(videoGame).
 		when()
-			.post(VideoGamesEndpoints.ALL_VIDEO_GAMES).
+			.post(Endpoints.ALL_VIDEO_GAMES).
 		then();
 	}
 	
@@ -108,7 +108,7 @@ public class VideoGameDBTests extends VideoGameConfig {
 				given()
 					.pathParam("videoGameId", 103).
 				when()
-					.get(VideoGamesEndpoints.SINGLE_VIDEO_GAME);
+					.get(Endpoints.SINGLE_VIDEO_GAME);
 		
 		VideoGamePOJO videoGamePojo = response.body().as(VideoGamePOJO.class);
 		System.out.println(videoGamePojo.toString());
@@ -121,7 +121,7 @@ public class VideoGameDBTests extends VideoGameConfig {
 			.header("Content-Type", "application/xml")
 			.header("Accept", "application/xml").
 		when()
-			.get(VideoGamesEndpoints.SINGLE_VIDEO_GAME).
+			.get(Endpoints.SINGLE_VIDEO_GAME).
 		then()
 			.body(matchesXsdInClasspath("VideoGameXSD.xsd"));
 	}
@@ -131,21 +131,21 @@ public class VideoGameDBTests extends VideoGameConfig {
 		given()
 			.pathParam("videoGameId", 103).
 		when()
-			.get(VideoGamesEndpoints.SINGLE_VIDEO_GAME).
+			.get(Endpoints.SINGLE_VIDEO_GAME).
 		then()
 			.body(matchesJsonSchemaInClasspath("VideoGameJsonSchema.json"));
 	}
 	
 	@Test
 	public void captureResponseTime() {
-		long responseTime = get(VideoGamesEndpoints.ALL_VIDEO_GAMES).time();
+		long responseTime = get(Endpoints.ALL_VIDEO_GAMES).time();
 		System.out.println("Response Time in MS: " + responseTime);
 	}
 	
 	@Test
 	public void assertOnResponseTime() {
 		when().
-			get(VideoGamesEndpoints.ALL_VIDEO_GAMES).
+			get(Endpoints.ALL_VIDEO_GAMES).
 		then()
 			.time(lessThan(1600L));
 
