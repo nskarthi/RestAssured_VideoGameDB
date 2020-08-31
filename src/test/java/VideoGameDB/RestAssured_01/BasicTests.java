@@ -3,12 +3,12 @@ package VideoGameDB.RestAssured_01;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import VideoGameDB.config.VideoGameConfig;
-import VideoGameDB.config.VideoGamesEndpoints;
+import VideoGameDB.config.TestConfig;
+import VideoGameDB.config.Endpoints;
 
 import static io.restassured.RestAssured.*;
 
-public class BasicTests extends VideoGameConfig {
+public class BasicTests extends TestConfig {
 
 	@Ignore
 	@Test
@@ -22,7 +22,7 @@ public class BasicTests extends VideoGameConfig {
 	
 	@Test
 	public void myFirstTestWithEndpoint() {
-		get(VideoGamesEndpoints.ALL_VIDEO_GAMES).
+		get(Endpoints.ALL_VIDEO_GAMES).
 		then().log().all();
 	}
 }
