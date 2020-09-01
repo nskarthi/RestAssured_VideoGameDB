@@ -1,4 +1,4 @@
-package VideoGameDB.config;
+package config;
 
 import org.junit.BeforeClass;
 
@@ -36,7 +36,8 @@ public class TestConfig {
 				.addFilter(new ResponseLoggingFilter())
 				.build();
 
-		RestAssured.requestSpecification = football_requestSpec;
+		// RestAssured.requestSpecification = football_requestSpec;
+		RestAssured.requestSpecification = videoGame_requestSpec;
 
 		responseSpec = new ResponseSpecBuilder()
 				.expectStatusCode(200)

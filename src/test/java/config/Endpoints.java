@@ -1,4 +1,4 @@
-package VideoGameDB.config;
+package config;
 
 public interface Endpoints {
 	String ALL_VIDEO_GAMES = "videogames";

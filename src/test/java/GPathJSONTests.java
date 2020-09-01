@@ -1,9 +1,7 @@
-package VideoGameDB.RestAssured_01;
-
 import org.junit.Test;
 
-import VideoGameDB.config.Endpoints;
-import VideoGameDB.config.TestConfig;
+import config.Endpoints;
+import config.TestConfig;
 import io.restassured.response.Response;
 import static io.restassured.RestAssured.*;
 

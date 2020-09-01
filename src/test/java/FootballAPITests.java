@@ -1,5 +1,3 @@
-package VideoGameDB.RestAssured_01;
-
 import org.junit.Ignore;
 import org.junit.Test;
 import static org.hamcrest.Matchers.equalTo;
@@ -8,8 +6,8 @@ import java.util.List;
 
 import static io.restassured.RestAssured.*;
 
-import VideoGameDB.config.Endpoints;
-import VideoGameDB.config.TestConfig;
+import config.Endpoints;
+import config.TestConfig;
 import io.restassured.http.ContentType;
 import io.restassured.http.Header;
 import io.restassured.http.Headers;
@@ -17,7 +15,6 @@ import io.restassured.response.Response;
 
 public class FootballAPITests extends TestConfig {
 
-	@Ignore
 	@Test
 	public void getDetailsOfOneArea() {
 		given()

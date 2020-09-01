@@ -1,10 +1,11 @@
-package VideoGameDB.RestAssured_01;
-
 import org.junit.Test;
+
+import VideoGameDB.RestAssured_01.VideoGamePOJO;
+
 import static org.hamcrest.Matchers.lessThan;
 
-import VideoGameDB.config.TestConfig;
-import VideoGameDB.config.Endpoints;
+import config.TestConfig;
+import config.Endpoints;
 import io.restassured.response.Response;
 
 import static io.restassured.RestAssured.*;
